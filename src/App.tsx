@@ -4,6 +4,7 @@ import { getChance, postChance } from "./api";
 import { formatISODate } from "./utils";
 import { useAppReady, uiModule } from "mincu-react";
 import Loading from "./loading";
+import bgurl from "../bg.jpg";
 
 interface Props {}
 
@@ -21,7 +22,7 @@ const App: FC<Props> = () => {
         className="fixed -z-10 w-screen h-screen bg-no-repeat bg-center"
         style={{
           backgroundColor: "#9ED1C9",
-          backgroundImage: 'url("./bg.jpg")',
+          backgroundImage: `url(${bgurl})`,
         }}
       />
       <div className="flex flex-col items-center pt-20 ">
