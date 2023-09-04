@@ -10,10 +10,10 @@ interface Props {}
 
 const App: FC<Props> = () => {
   useAppReady(() => {
-    alert('请在南大家园APP中打开')
+    alert("请在南大家园APP中打开");
   });
-  const { data, loading, refresh, mutate } = useRequest(getChance);
-  const { runAsync, error } = useRequest(postChance, { manual: true });
+  const { data, loading, error, refresh, mutate } = useRequest(getChance);
+  const { runAsync, error: postErr } = useRequest(postChance, { manual: true });
   // console.log(data, loading);
   error && uiModule?.toast.fail(error.message);
   return (
@@ -39,6 +39,9 @@ const App: FC<Props> = () => {
                 try {
                   const res = await runAsync();
                   if (res?.data) uiModule?.toast.success("扭蛋成功");
+                  else {
+                    uiModule?.toast.fail("扭蛋失败:" + postErr ?? "");
+                  }
                   refresh();
                 } catch (err) {
                   console.log("error", err);
