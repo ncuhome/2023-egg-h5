@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "README.md"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.5.0
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Build project
+        run: |
+          echo install dependencies
+          pnpm i
+          echo build project
+          pnpm build
+
+      - name: aliyun-oss-website-action
+        uses: fangbinwei/aliyun-oss-website-action@v1
+        with:
+          folder: dist
+          accessKeyId: ${{ secrets.ACCESSKEYID }}
+          accessKeySecret: ${{ secrets.ACCESSKEYSECRET }}
+          bucket: 2023-egg-h5
+          endpoint: oss-cn-hangzhou.aliyuncs.com
+          skipSetting: true
