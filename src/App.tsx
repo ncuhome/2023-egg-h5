@@ -38,7 +38,7 @@ const App: FC<Props> = () => {
               onClick={async () => {
                 try {
                   const res = await runAsync();
-                  if (res.data) uiModule?.toast.success("扭蛋成功");
+                  if (res?.data) uiModule?.toast.success("扭蛋成功");
                   refresh();
                 } catch (err) {
                   console.log("error", err);
