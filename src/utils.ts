@@ -15,6 +15,7 @@ export const formatISODate = (isoDate) => {
   };
 
   // 进行格式化
+  // @ts-ignore
   const formatter = new Intl.DateTimeFormat("zh-CN", options);
   const formattedDate = formatter.format(date);
 
