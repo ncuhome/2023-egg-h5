@@ -40,7 +40,7 @@ const App: FC<Props> = () => {
                   const res = await runAsync();
                   if (res?.data) uiModule?.toast.success("扭蛋成功");
                   else {
-                    uiModule?.toast.fail("扭蛋失败:" + postErr ?? "");
+                    uiModule?.toast.fail("扭蛋失败:" + postErr || "");
                   }
                   refresh();
                 } catch (err) {
